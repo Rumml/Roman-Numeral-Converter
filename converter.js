@@ -1,7 +1,6 @@
 function convertToRoman(num) {
-    let result = '';
-
-    let numbers = {
+    //initialized Roman numbers
+    let romanNumbers = {
         1000 : 'M',
         900  : 'CM',
         600  : 'DC',
@@ -21,9 +20,10 @@ function convertToRoman(num) {
         5    : 'V',
         1    : 'I'
     }
-    
-    let greekNumber = Object.keys(numbers);
-    
+
+    let greekNumber = Object.keys(romanNumbers);
+
+    //sort romanNumbers keys by DESC
     let filterGreekNumber = function (greekNumber, num) {
         return greekNumber.sort((a, b) => b - a).filter((elem) => elem <= num);
     }
@@ -34,14 +34,14 @@ function convertToRoman(num) {
         return numbers[key];
     }
 
+    let result = '';
+
+    // loop, collect new string of Roman numbers
     while (num > 0) {
        num = num - greekNumber[0];
-       result += getRomanNumber(numbers, greekNumber[0]);
+       result += getRomanNumber(romanNumbers, greekNumber[0]);
        greekNumber = filterGreekNumber(greekNumber, num);
     }
 
  return result;
-
 }
-
-convertToRoman(3999);
